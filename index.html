@@ -40,6 +40,9 @@
   p { text-wrap: pretty; max-width: 62ch; }
   a { color: inherit; }
   img { max-width: 100%; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--violet); outline-offset: 3px;
+  }
 
   /* ── Íconos SVG (trazo estilo lucide) ── */
   .ic {
@@ -115,7 +118,7 @@
   .seg button {
     font: inherit; font-weight: 600; font-size: 0.88rem; letter-spacing: -0.01em;
     color: var(--ink-soft); background: transparent; border: 0; cursor: pointer;
-    padding: 8px 14px; border-radius: 12px; transition: background .18s ease, color .18s ease;
+    padding: 10px 14px; border-radius: 12px; transition: background .18s ease, color .18s ease;
     display: inline-flex; align-items: center; gap: 7px;
   }
   .seg .ic { width: 15px; height: 15px; }
@@ -369,7 +372,7 @@
   <div class="hero-grid">
     <div>
       <h1>Tu agenda, tus clientes y tus ingresos. <em>Una app hecha para tu negocio.</em></h1>
-      <p class="hero-sub">Desarrollo sistemas de gestión a la medida para médicos, barberos y cualquier negocio que viva de las citas. Con tu nombre, tus servicios y tus precios — en dólares y bolívares a tasa BCV, con WhatsApp integrado.</p>
+      <p class="hero-sub">Desarrollo sistemas de gestión a la medida para médicos, barberos y cualquier negocio que viva de las citas. Con tu nombre, tus servicios y tus precios: dólares y bolívares a tasa BCV, y WhatsApp integrado.</p>
       <div class="hero-cta">
         <a class="btn btn-wa" href="https://wa.me/584127782232?text=Hola%20PolitiWeb%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20sistema%20de%20citas%20para%20mi%20negocio" target="_blank" rel="noopener">
           <svg class="wa-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
@@ -377,7 +380,7 @@
         </a>
         <a class="btn btn-ghost" href="#precios">¿Qué incluye?</a>
       </div>
-      <p class="hero-proof"><span class="dot-live"></span>En producción — usado a diario por especialistas de salud en Venezuela.</p>
+      <p class="hero-proof"><span class="dot-live"></span>En producción: usado a diario por especialistas de salud en Venezuela.</p>
     </div>
 
     <div class="demo-col">
@@ -450,8 +453,8 @@
       <p>Los sistemas genéricos no entienden cómo se cobra en Venezuela. El tuyo sí: cada pago se registra en su moneda y se convierte automáticamente con la tasa BCV del día.</p>
       <ul class="money-points">
         <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Tasa BCV actualizada sola, todos los días</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Cada pago guarda la tasa del día en que se cobró — tus totales históricos nunca se dañan</li>
-        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Efectivo, Zelle, Pago Móvil, transferencia, PayPal, Binance — y pagos divididos en dos métodos</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Cada pago guarda la tasa del día en que se cobró, así tus totales históricos nunca se dañan</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Efectivo, Zelle, Pago Móvil, transferencia, PayPal, Binance, con pagos divididos en dos métodos</li>
         <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Totales del mes y del año en USD reales, no estimados</li>
       </ul>
     </div>
@@ -460,7 +463,7 @@
       <div class="rrow"><span class="rl">Ingresos del mes (Bs)</span><span class="rv sky">48.350,00 Bs</span></div>
       <div class="rrow"><span class="rl">Egresos del negocio</span><span class="rv">$310,00</span></div>
       <div class="rrow"><span class="rl">Balance neto en USD</span><span class="rv green">+$1.269,60</span></div>
-      <p class="receipt-cap">Conversión con la tasa BCV guardada en cada pago — así se veía tu mes de verdad.</p>
+      <p class="receipt-cap">Conversión con la tasa BCV guardada en cada pago: así se veía tu mes de verdad.</p>
     </div>
   </div>
 </section>
@@ -494,19 +497,14 @@
     <div class="feat reveal">
       <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></div>
       <h3>Estadísticas</h3>
-      <p>Tus mejores meses, servicios más pedidos y comparativas — decide con datos.</p>
+      <p>Tus mejores meses, servicios más pedidos y comparativas para decidir con datos.</p>
     </div>
-    <div class="feat reveal">
-      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg></div>
-      <h3>Asistente con IA</h3>
-      <p>Pregúntale «¿cuánto ingresé este mes?» y te responde con tus números reales.</p>
-    </div>
-    <div class="feat reveal">
+    <div class="feat wide reveal">
       <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></div>
       <h3>Se instala como app</h3>
       <p>Directo en tu teléfono, sin tiendas de aplicaciones y sin descargas de nadie más.</p>
     </div>
-    <div class="feat reveal">
+    <div class="feat wide reveal">
       <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></div>
       <h3>Tus datos son tuyos</h3>
       <p>Base de datos propia y exclusiva para tu negocio, con acceso solo para ti.</p>
@@ -572,7 +570,7 @@
   <div class="faq reveal">
     <details>
       <summary>¿Cuánto cuesta?</summary>
-      <p>Depende de las funciones que tu negocio necesite, por eso cada sistema se cotiza aparte. Escríbeme por WhatsApp, cuéntame cómo trabajas y te paso tu precio el mismo día — gratis y sin compromiso. Además hay opciones de financiamiento para pagar por partes.</p>
+      <p>Depende de las funciones que tu negocio necesite, por eso cada sistema se cotiza aparte. Escríbeme por WhatsApp, cuéntame cómo trabajas y te paso tu precio el mismo día, gratis y sin compromiso. Además hay opciones de financiamiento para pagar por partes.</p>
     </details>
     <details>
       <summary>¿Tengo que descargarla de Play Store o App Store?</summary>
@@ -611,7 +609,7 @@
 
 <footer class="wrap">
   <div class="foot">
-    <span>© 2026 PolitiWeb Studio — Hecho en Venezuela</span>
+    <span>© 2026 PolitiWeb Studio · Hecho en Venezuela</span>
     <div class="foot-links">
       <a href="https://politiwebstudio.com" target="_blank" rel="noopener">politiwebstudio.com</a>
       <a href="https://www.instagram.com/politiwebstudio/" target="_blank" rel="noopener">Instagram</a>
