@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PolitiWeb Studio — Sistemas de citas a la medida de tu negocio</title>
+<meta name="description" content="Desarrollo sistemas de gestión de citas, clientes e ingresos para médicos, barberos y negocios de servicios en Venezuela. Dólares y bolívares a tasa BCV, WhatsApp integrado, listo en una semana." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0d0719;
+    --bg-2: #140b26;
+    --ink: rgba(255,255,255,0.95);
+    --ink-body: rgba(255,255,255,0.78);
+    --ink-soft: rgba(255,255,255,0.60);
+    --violet: #a78bfa;
+    --violet-deep: #7c3aed;
+    --wa: #25d366;
+    --wa-ink: #06331a;
+    --line: rgba(255,255,255,0.14);
+    --glass: rgba(255,255,255,0.07);
+    --glass-strong: rgba(255,255,255,0.11);
+    --radius: 22px;
+    --z-nav: 50;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink-body);
+    font-family: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 17px;
+    line-height: 1.65;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { color: var(--ink); line-height: 1.12; text-wrap: balance; font-weight: 800; }
+  p { text-wrap: pretty; max-width: 62ch; }
+  a { color: inherit; }
+  img { max-width: 100%; }
+
+  /* ── Fondo: malla + orbes (el mundo visual del producto) ── */
+  .mesh {
+    position: fixed; inset: 0; z-index: -2;
+    background:
+      radial-gradient(1000px 700px at 85% -10%, rgba(124,58,237,0.35), transparent 60%),
+      radial-gradient(800px 600px at -10% 30%, rgba(217,70,239,0.16), transparent 55%),
+      radial-gradient(900px 700px at 50% 110%, rgba(99,102,241,0.22), transparent 60%),
+      linear-gradient(180deg, var(--bg-2), var(--bg) 40%);
+  }
+  .orb { position: fixed; border-radius: 50%; filter: blur(90px); z-index: -1; opacity: 0.5; pointer-events: none; }
+  .orb-1 { width: 420px; height: 420px; top: -120px; right: -80px; background: rgba(139,92,246,0.5); animation: drift1 26s ease-in-out infinite alternate; }
+  .orb-2 { width: 340px; height: 340px; top: 45%; left: -140px; background: rgba(217,70,239,0.32); animation: drift2 32s ease-in-out infinite alternate; }
+  .orb-3 { width: 380px; height: 380px; bottom: -140px; right: 12%; background: rgba(99,102,241,0.38); animation: drift1 38s ease-in-out infinite alternate-reverse; }
+  @keyframes drift1 { to { transform: translate(-60px, 70px) scale(1.12); } }
+  @keyframes drift2 { to { transform: translate(80px, -50px) scale(0.92); } }
+
+  .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav);
+    backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    background: rgba(13,7,25,0.66);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-in { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; }
+  .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--ink); text-decoration: none; font-size: 1.05rem; letter-spacing: -0.01em; }
+  .logo-mark {
+    width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 4px 18px rgba(124,58,237,0.45);
+    color: white; font-size: 1rem;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-weight: 800; text-decoration: none; border-radius: 16px;
+    padding: 13px 22px; font-size: 1rem; letter-spacing: -0.01em;
+    transition: transform .18s cubic-bezier(.22,1,.36,1), box-shadow .18s ease;
+  }
+  .btn-wa { background: var(--wa); color: var(--wa-ink); box-shadow: 0 6px 26px rgba(37,211,102,0.35), inset 0 1px 0 rgba(255,255,255,0.45); }
+  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(37,211,102,0.45), inset 0 1px 0 rgba(255,255,255,0.45); }
+  .btn-wa:active { transform: translateY(0); }
+  .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: var(--glass); }
+  .btn-ghost:hover { background: var(--glass-strong); transform: translateY(-2px); }
+  .btn-sm { padding: 9px 16px; font-size: 0.9rem; border-radius: 13px; }
+  .wa-ic { width: 19px; height: 19px; flex-shrink: 0; }
+
+  /* ── Hero ── */
+  .hero { padding: clamp(120px, 16vh, 170px) 0 clamp(40px, 6vh, 70px); }
+  .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: clamp(32px, 5vw, 70px); align-items: center; }
+  .hero h1 { font-size: clamp(2.35rem, 5.4vw, 4.1rem); letter-spacing: -0.025em; }
+  .hero h1 em { font-style: normal; color: var(--violet); }
+  .hero-sub { margin-top: 20px; font-size: clamp(1.02rem, 1.4vw, 1.16rem); color: var(--ink-body); }
+  .hero-cta { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .hero-proof { margin-top: 26px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 0.92rem; }
+  .dot-live { width: 9px; height: 9px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px rgba(52,211,153,0.18); flex-shrink: 0; }
+
+  /* ── Teléfono demo ── */
+  .demo-col { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+  .seg {
+    display: flex; gap: 4px; padding: 4px; border-radius: 16px;
+    background: var(--glass); border: 1px solid var(--line);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .seg button {
+    font: inherit; font-weight: 600; font-size: 0.88rem; letter-spacing: -0.01em;
+    color: var(--ink-soft); background: transparent; border: 0; cursor: pointer;
+    padding: 8px 15px; border-radius: 12px; transition: background .18s ease, color .18s ease;
+  }
+  .seg button[aria-pressed="true"] { background: rgba(255,255,255,0.16); color: var(--ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); }
+  .seg-hint { font-size: 0.84rem; color: var(--ink-soft); }
+
+  .phone {
+    width: min(315px, 84vw);
+    border-radius: 44px; padding: 12px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04));
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 40px 90px rgba(0,0,0,0.55), 0 0 80px rgba(124,58,237,0.25), inset 0 1px 0 rgba(255,255,255,0.3);
+    animation: floaty 7s ease-in-out infinite alternate;
+  }
+  @keyframes floaty { to { transform: translateY(-12px); } }
+  .screen {
+    border-radius: 34px; overflow: hidden; padding: 18px 14px 20px;
+    background:
+      radial-gradient(320px 240px at 90% -5%, rgba(139,92,246,0.4), transparent 65%),
+      radial-gradient(280px 220px at -10% 100%, rgba(99,102,241,0.3), transparent 60%),
+      linear-gradient(180deg, #170d2e, #0e0720);
+    display: flex; flex-direction: column; gap: 10px;
+    font-size: 0.8rem; line-height: 1.35;
+  }
+  .s-top { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
+  .s-app { color: var(--ink); font-weight: 800; font-size: 0.92rem; letter-spacing: -0.01em; }
+  .s-ic { width: 26px; height: 26px; border-radius: 9px; background: var(--glass-strong); border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.75rem; }
+  .g-card {
+    border-radius: 18px; padding: 12px 14px;
+    background: var(--glass); border: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+  }
+  .s-hello { text-align: center; }
+  .s-hello .h1 { color: var(--ink); font-weight: 800; font-size: 1.12rem; margin-top: 1px; }
+  .s-hello .cap { color: var(--ink-soft); font-size: 0.72rem; }
+  .s-bcv { display: inline-flex; gap: 6px; align-items: center; margin-top: 7px; padding: 4px 10px; border-radius: 12px; background: rgba(167,139,250,0.14); border: 1px solid rgba(167,139,250,0.3); color: var(--violet); font-weight: 600; font-size: 0.7rem; }
+  .s-bcv b { color: var(--ink); }
+  .s-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .s-stat { text-align: center; padding: 10px 6px; }
+  .s-stat .n { color: var(--ink); font-weight: 800; font-size: 1.15rem; }
+  .s-stat .l { color: var(--ink-soft); font-size: 0.68rem; }
+  .s-sec { color: var(--ink); font-weight: 600; font-size: 0.78rem; margin-bottom: 7px; display: flex; justify-content: space-between; align-items: baseline; }
+  .s-sec span { color: var(--ink-soft); font-weight: 400; font-size: 0.66rem; }
+  .s-cita { display: flex; align-items: center; gap: 9px; padding: 8px 9px; border-radius: 13px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09); }
+  .s-cita + .s-cita { margin-top: 6px; }
+  .s-bar { width: 3px; height: 26px; border-radius: 3px; background: rgba(167,139,250,0.75); flex-shrink: 0; }
+  .s-cita .who { color: var(--ink); font-weight: 600; font-size: 0.76rem; }
+  .s-cita .what { color: var(--ink-soft); font-size: 0.66rem; }
+  .s-cita .hr { margin-left: auto; color: var(--violet); font-weight: 600; font-size: 0.68rem; flex-shrink: 0; }
+  .s-pay { display: flex; align-items: center; gap: 9px; padding: 8px 9px; border-radius: 13px; background: rgba(52,211,153,0.09); border: 1px solid rgba(52,211,153,0.18); }
+  .s-pay .who { color: var(--ink); font-weight: 600; font-size: 0.76rem; }
+  .s-pay .what { color: var(--ink-soft); font-size: 0.66rem; }
+  .s-pay .amt { margin-left: auto; color: #6ee7b7; font-weight: 800; font-size: 0.78rem; }
+  .t-swap { transition: opacity .22s ease; }
+  .swapping .t-swap { opacity: 0; }
+
+  /* ── Secciones ── */
+  section { padding: clamp(56px, 9vh, 110px) 0; }
+  .sec-head { max-width: 640px; margin-bottom: clamp(30px, 5vh, 52px); }
+  .sec-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); letter-spacing: -0.02em; }
+  .sec-head p { margin-top: 14px; color: var(--ink-body); }
+
+  /* Para quién: marquesina de oficios */
+  .who { padding: 10px 0 0; }
+  .who-track { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .who-chip {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 11px 18px; border-radius: 999px; font-weight: 600; color: var(--ink);
+    background: var(--glass); border: 1px solid var(--line); font-size: 0.97rem;
+  }
+  .who-note { text-align: center; margin: 22px auto 0; color: var(--ink-soft); font-size: 0.95rem; }
+
+  /* Feature principal (doble moneda) */
+  .money { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 60px); align-items: center; }
+  .money h2 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); letter-spacing: -0.02em; }
+  .money p { margin-top: 16px; }
+  .money-points { margin-top: 22px; display: grid; gap: 12px; list-style: none; }
+  .money-points li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-body); }
+  .money-points .tick { color: #6ee7b7; font-weight: 800; flex-shrink: 0; }
+  .receipt {
+    border-radius: var(--radius); padding: 22px;
+    background: var(--glass); border: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 30px 70px rgba(0,0,0,0.35);
+    max-width: 420px; justify-self: center; width: 100%;
+  }
+  .receipt .rrow { display: flex; justify-content: space-between; align-items: baseline; padding: 11px 2px; }
+  .receipt .rrow + .rrow { border-top: 1px dashed rgba(255,255,255,0.14); }
+  .receipt .rl { color: var(--ink-soft); font-size: 0.92rem; }
+  .receipt .rv { color: var(--ink); font-weight: 800; }
+  .receipt .rv.green { color: #6ee7b7; }
+  .receipt .rv.sky { color: #7dd3fc; }
+  .receipt-cap { margin-top: 12px; color: var(--ink-soft); font-size: 0.84rem; }
+
+  /* Funciones: lista asimétrica */
+  .feats { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; }
+  .feat {
+    grid-column: span 2; border-radius: var(--radius); padding: 24px;
+    background: var(--glass); border: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
+    transition: transform .2s cubic-bezier(.22,1,.36,1), background .2s ease;
+  }
+  .feat:hover { transform: translateY(-4px); background: var(--glass-strong); }
+  .feat.wide { grid-column: span 3; }
+  .feat .em { font-size: 1.5rem; }
+  .feat h3 { font-size: 1.08rem; margin: 12px 0 7px; letter-spacing: -0.01em; }
+  .feat p { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.55; }
+
+  /* Proceso */
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; counter-reset: paso; }
+  .step { border-radius: var(--radius); padding: 26px; background: var(--glass); border: 1px solid var(--line); position: relative; }
+  .step::before {
+    counter-increment: paso; content: counter(paso);
+    display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; font-weight: 800; font-size: 1.1rem;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 6px 20px rgba(124,58,237,0.4);
+    margin-bottom: 16px;
+  }
+  .step h3 { font-size: 1.12rem; letter-spacing: -0.01em; }
+  .step p { margin-top: 8px; font-size: 0.95rem; color: var(--ink-soft); }
+  .steps-note { margin-top: 24px; color: var(--ink); font-weight: 600; text-align: center; }
+  .steps-note b { color: var(--violet); }
+
+  /* Precios */
+  .prices { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; }
+  .price {
+    border-radius: 26px; padding: 30px;
+    background: var(--glass); border: 1px solid var(--line);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14);
+  }
+  .price.featured { background: rgba(139,92,246,0.13); border-color: rgba(139,92,246,0.4); }
+  .price .tag { font-weight: 600; color: var(--ink); font-size: 1.02rem; }
+  .price .amount { margin-top: 10px; color: var(--ink); font-weight: 800; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -0.02em; line-height: 1; }
+  .price .amount small { font-size: 0.45em; font-weight: 600; color: var(--ink-soft); letter-spacing: 0; }
+  .price .desde { color: var(--ink-soft); font-size: 0.86rem; margin-top: 6px; }
+  .price ul { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
+  .price li { display: flex; gap: 10px; font-size: 0.95rem; color: var(--ink-body); }
+  .price li::before { content: "✓"; color: #6ee7b7; font-weight: 800; }
+  .price-note { margin-top: 20px; color: var(--ink-soft); font-size: 0.93rem; max-width: 860px; }
+
+  /* FAQ */
+  .faq { max-width: 760px; }
+  details {
+    border-radius: 18px; background: var(--glass); border: 1px solid var(--line);
+    padding: 0 22px; overflow: hidden;
+  }
+  details + details { margin-top: 10px; }
+  summary {
+    cursor: pointer; list-style: none; padding: 18px 0;
+    color: var(--ink); font-weight: 600; font-size: 1.02rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 14px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--violet); font-weight: 800; font-size: 1.3rem; transition: transform .2s ease; flex-shrink: 0; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { padding: 0 0 20px; color: var(--ink-body); font-size: 0.97rem; }
+
+  /* CTA final */
+  .cta-final {
+    border-radius: 32px; padding: clamp(40px, 6vw, 70px);
+    text-align: center;
+    background:
+      radial-gradient(600px 300px at 50% -20%, rgba(139,92,246,0.45), transparent 70%),
+      rgba(139,92,246,0.10);
+    border: 1px solid rgba(139,92,246,0.35);
+  }
+  .cta-final h2 { font-size: clamp(1.8rem, 4vw, 2.9rem); letter-spacing: -0.025em; }
+  .cta-final p { margin: 16px auto 0; color: var(--ink-body); }
+  .cta-final .btn { margin-top: 30px; font-size: 1.08rem; padding: 16px 30px; }
+  .cta-sub { margin-top: 16px; color: var(--ink-soft); font-size: 0.9rem; }
+
+  footer { padding: 44px 0 60px; color: var(--ink-soft); font-size: 0.94rem; }
+  .foot { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.09); padding-top: 30px; }
+  .foot a { color: var(--ink-body); text-decoration: none; }
+  .foot a:hover { color: var(--ink); }
+  .foot-links { display: flex; gap: 22px; flex-wrap: wrap; }
+
+  /* Reveals (mejoran un default visible; solo si hay JS) */
+  .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s cubic-bezier(.22,1,.36,1), transform .7s cubic-bezier(.22,1,.36,1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb, .phone { animation: none; }
+    html { scroll-behavior: auto; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    .btn, .feat { transition: none; }
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .demo-col { order: 2; }
+    .money { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .prices { grid-template-columns: 1fr; }
+    .feats { grid-template-columns: 1fr 1fr; }
+    .feat, .feat.wide { grid-column: span 2; }
+  }
+  @media (min-width: 560px) and (max-width: 900px) {
+    .feat { grid-column: span 1; }
+    .feat.wide { grid-column: span 2; }
+  }
+</style>
+</head>
+<body>
+<div class="mesh" aria-hidden="true"></div>
+<div class="orb orb-1" aria-hidden="true"></div>
+<div class="orb orb-2" aria-hidden="true"></div>
+<div class="orb orb-3" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#"><span class="logo-mark">P</span>PolitiWeb Studio</a>
+    <a class="btn btn-wa btn-sm" href="https://wa.me/584127782232?text=Hola%20PolitiWeb%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20sistema%20de%20citas%20para%20mi%20negocio" target="_blank" rel="noopener">
+      <svg class="wa-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+      WhatsApp
+    </a>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div class="hero-grid">
+    <div>
+      <h1>Tu agenda, tus clientes y tus ingresos. <em>Una app hecha para tu negocio.</em></h1>
+      <p class="hero-sub">Desarrollo sistemas de gestión a la medida para médicos, barberos y cualquier negocio que viva de las citas. Con tu nombre, tus servicios y tus precios — en dólares y bolívares a tasa BCV, con WhatsApp integrado.</p>
+      <div class="hero-cta">
+        <a class="btn btn-wa" href="https://wa.me/584127782232?text=Hola%20PolitiWeb%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20sistema%20de%20citas%20para%20mi%20negocio" target="_blank" rel="noopener">
+          <svg class="wa-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+          Pide tu cotización gratis
+        </a>
+        <a class="btn btn-ghost" href="#precios">Ver precios</a>
+      </div>
+      <p class="hero-proof"><span class="dot-live"></span>En producción — usado a diario por especialistas de salud en Venezuela.</p>
+    </div>
+
+    <div class="demo-col">
+      <div class="seg" role="group" aria-label="Elige un tipo de negocio para la demostración">
+        <button type="button" data-perfil="consultorio" aria-pressed="true">🩺 Consultorio</button>
+        <button type="button" data-perfil="barberia" aria-pressed="false">💈 Barbería</button>
+        <button type="button" data-perfil="spa" aria-pressed="false">💅 Spa</button>
+      </div>
+
+      <div class="phone" id="phone" aria-label="Vista previa de la aplicación">
+        <div class="screen">
+          <div class="s-top">
+            <span class="s-app t-swap" data-t="app">DoctorHub</span>
+            <span class="s-ic">📊</span>
+          </div>
+          <div class="g-card s-hello">
+            <div class="cap t-swap" data-t="saludo">Bienvenida</div>
+            <div class="h1 t-swap" data-t="nombre">Dra. Gómez</div>
+            <div class="cap">martes, 15 de julio</div>
+            <span class="s-bcv">📈 BCV <b>142,35 Bs</b></span>
+          </div>
+          <div class="s-stats">
+            <div class="g-card s-stat"><div class="n">248</div><div class="l t-swap" data-t="personas">Pacientes</div></div>
+            <div class="g-card s-stat"><div class="n">6</div><div class="l">Citas hoy</div></div>
+          </div>
+          <div class="g-card">
+            <div class="s-sec">Citas de hoy <span>Ver todas →</span></div>
+            <div class="s-cita">
+              <div class="s-bar"></div>
+              <div><div class="who">María Fernández</div><div class="what t-swap" data-t="serv1">Control prenatal</div></div>
+              <div class="hr">9:30 AM</div>
+            </div>
+            <div class="s-cita">
+              <div class="s-bar"></div>
+              <div><div class="who">Carla Rodríguez</div><div class="what t-swap" data-t="serv2">Ecografía</div></div>
+              <div class="hr">11:00 AM</div>
+            </div>
+          </div>
+          <div class="g-card">
+            <div class="s-sec">Últimos ingresos</div>
+            <div class="s-pay">
+              <div><div class="who">Ana Torres</div><div class="what t-swap" data-t="serv3">Consulta · Zelle</div></div>
+              <div class="amt">$40.00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="seg-hint">👆 La misma app, con las palabras de tu negocio.</p>
+    </div>
+  </div>
+</header>
+
+<section class="who wrap reveal">
+  <div class="who-track">
+    <span class="who-chip">🩺 Médicos y especialistas</span>
+    <span class="who-chip">💈 Barberías</span>
+    <span class="who-chip">💅 Estética y spas</span>
+    <span class="who-chip">🧠 Psicólogos</span>
+    <span class="who-chip">🦷 Odontólogos</span>
+    <span class="who-chip">🐾 Veterinarias</span>
+    <span class="who-chip">📋 Y cualquier negocio con citas</span>
+  </div>
+  <p class="who-note">Si tu día se organiza por citas y necesitas saber cuánto entra y cuánto sale, esto es para ti.</p>
+</section>
+
+<section class="wrap">
+  <div class="money">
+    <div class="reveal">
+      <h2>Dólares y bolívares sin sacar la calculadora</h2>
+      <p>Los sistemas genéricos no entienden cómo se cobra en Venezuela. El tuyo sí: cada pago se registra en su moneda y se convierte automáticamente con la tasa BCV del día.</p>
+      <ul class="money-points">
+        <li><span class="tick">✓</span>Tasa BCV actualizada sola, todos los días</li>
+        <li><span class="tick">✓</span>Cada pago guarda la tasa del día en que se cobró — tus totales históricos nunca se dañan</li>
+        <li><span class="tick">✓</span>Efectivo, Zelle, Pago Móvil, transferencia, PayPal, cripto — y pagos divididos en dos métodos</li>
+        <li><span class="tick">✓</span>Totales del mes y del año en USD reales, no estimados</li>
+      </ul>
+    </div>
+    <div class="receipt reveal" aria-label="Ejemplo de resumen mensual">
+      <div class="rrow"><span class="rl">Ingresos del mes (USD)</span><span class="rv green">$1.240,00</span></div>
+      <div class="rrow"><span class="rl">Ingresos del mes (Bs)</span><span class="rv sky">48.350,00 Bs</span></div>
+      <div class="rrow"><span class="rl">Egresos del negocio</span><span class="rv">$310,00</span></div>
+      <div class="rrow"><span class="rl">Balance neto en USD</span><span class="rv green">+$1.269,60</span></div>
+      <p class="receipt-cap">Conversión con la tasa BCV guardada en cada pago — así se veía tu mes de verdad.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head reveal">
+    <h2>Todo lo que tu negocio necesita, nada que no uses</h2>
+    <p>No es una plantilla con mil menús: cada función existe porque un negocio real la usa todos los días.</p>
+  </div>
+  <div class="feats">
+    <div class="feat wide reveal">
+      <div class="em">📅</div>
+      <h3>Agenda de citas</h3>
+      <p>Cita rápida en tres toques, estados (atendida, cancelada, no asistió), reagendado con un botón y vista de los próximos 7 días.</p>
+    </div>
+    <div class="feat wide reveal">
+      <div class="em">💬</div>
+      <h3>WhatsApp integrado</h3>
+      <p>Escríbele a tus clientes con un toque y reactiva a los que tienen meses sin venir, con mensajes con tu nombre y tu estilo.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">👥</div>
+      <h3>Fichas de clientes</h3>
+      <p>Historial completo de citas y pagos por persona, con teléfono y cédula venezolanos.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">🧾</div>
+      <h3>Reportes en PDF</h3>
+      <p>Reporte mensual o anual de ingresos y egresos, listo para imprimir o enviar.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">📊</div>
+      <h3>Estadísticas</h3>
+      <p>Tus mejores meses, servicios más pedidos y comparativas — decide con datos.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">✨</div>
+      <h3>Asistente con IA</h3>
+      <p>Pregúntale «¿cuánto ingresé este mes?» y te responde con tus números reales.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">📱</div>
+      <h3>Se instala como app</h3>
+      <p>Directo en tu teléfono, sin tiendas de aplicaciones y sin descargas de nadie más.</p>
+    </div>
+    <div class="feat reveal">
+      <div class="em">🔒</div>
+      <h3>Tus datos son tuyos</h3>
+      <p>Base de datos propia y exclusiva para tu negocio, con acceso solo para ti.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head reveal">
+    <h2>De la primera conversación a tu app funcionando</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <h3>Conversamos</h3>
+      <p>Me escribes por WhatsApp y me cuentas cómo trabaja tu negocio: tus servicios, tus precios, cómo cobras.</p>
+    </div>
+    <div class="step reveal">
+      <h3>La hago tuya</h3>
+      <p>Desarrollo tu sistema sobre mi plataforma probada: tu nombre, tu logo, tus servicios y tu dominio propio.</p>
+    </div>
+    <div class="step reveal">
+      <h3>Te la entrego lista</h3>
+      <p>Instalada en tu teléfono, con tus datos cargados y una capacitación para que la domines desde el día uno.</p>
+    </div>
+  </div>
+  <p class="steps-note reveal">Tiempo típico de entrega: <b>una semana</b>.</p>
+</section>
+
+<section class="wrap" id="precios">
+  <div class="sec-head reveal">
+    <h2>Precios claros, sin sorpresas</h2>
+    <p>Pagas una vez por tu sistema personalizado y una mensualidad pequeña para que siempre esté en línea, respaldado y con soporte.</p>
+  </div>
+  <div class="prices">
+    <div class="price featured reveal">
+      <div class="tag">Implementación</div>
+      <div class="amount">$200 <small>pago único · desde</small></div>
+      <ul>
+        <li>Sistema completo personalizado a tu negocio</li>
+        <li>Tu marca: nombre, logo y colores</li>
+        <li>Tus servicios y métodos de pago configurados</li>
+        <li>Dominio propio e instalación en tus equipos</li>
+        <li>Capacitación incluida</li>
+      </ul>
+    </div>
+    <div class="price reveal">
+      <div class="tag">Plan mensual</div>
+      <div class="amount">$15 <small>al mes · desde</small></div>
+      <ul>
+        <li>Hosting y app siempre en línea</li>
+        <li>Respaldos automáticos de tus datos</li>
+        <li>Soporte directo por WhatsApp</li>
+        <li>Actualizaciones y ajustes menores</li>
+        <li>Tasa BCV actualizada a diario</li>
+      </ul>
+    </div>
+  </div>
+  <p class="price-note reveal">El precio final depende de lo que tu negocio necesite — la cotización es gratis y sin compromiso. Puedes pagar en dólares o en bolívares.</p>
+</section>
+
+<section class="wrap">
+  <div class="sec-head reveal">
+    <h2>Preguntas frecuentes</h2>
+  </div>
+  <div class="faq reveal">
+    <details>
+      <summary>¿Tengo que descargarla de Play Store o App Store?</summary>
+      <p>No. Es una aplicación web progresiva (PWA): se instala directo desde el navegador en tu teléfono, tablet o computadora, y funciona como cualquier app. Sin tiendas, sin actualizaciones manuales.</p>
+    </details>
+    <details>
+      <summary>¿Dónde quedan mis datos? ¿Puede verlos alguien más?</summary>
+      <p>Cada cliente tiene su propia base de datos exclusiva, protegida con usuario y contraseña. Tus pacientes o clientes, tus citas y tus números son solo tuyos, y se respaldan automáticamente.</p>
+    </details>
+    <details>
+      <summary>No soy médico ni barbero, ¿me sirve?</summary>
+      <p>Si tu negocio agenda citas y cobra por servicios, sí: psicólogos, odontólogos, veterinarias, estudios de tatuaje, entrenadores, técnicos… El sistema se adapta a tu vocabulario y a tus servicios.</p>
+    </details>
+    <details>
+      <summary>¿Y si necesito algo que la app no hace?</summary>
+      <p>Para eso es a la medida. En la cotización revisamos lo que tu negocio necesita y te digo qué está incluido y qué llevaría desarrollo adicional, con su precio claro antes de empezar.</p>
+    </details>
+    <details>
+      <summary>¿Cómo se paga?</summary>
+      <p>Efectivo, Zelle, transferencia o Pago Móvil, en dólares o bolívares. La implementación se paga 50% al iniciar y 50% al entregar.</p>
+    </details>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cta-final reveal">
+    <h2>Tu negocio merece más que un cuaderno y la memoria</h2>
+    <p>Cuéntame cómo trabajas y te muestro tu sistema andando. La primera conversación no cuesta nada.</p>
+    <a class="btn btn-wa" href="https://wa.me/584127782232?text=Hola%20PolitiWeb%2C%20quiero%20informaci%C3%B3n%20sobre%20el%20sistema%20de%20citas%20para%20mi%20negocio" target="_blank" rel="noopener">
+      <svg class="wa-ic" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.4-.7-2.9-1.1-4.7-4-4.9-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c0 .2.1.4 0 .6l-.4.6-.5.5c-.2.2-.3.4-.1.7.2.3.8 1.4 1.8 2.2 1.2 1.1 2.3 1.4 2.6 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.5-.2.8-.1l2 1c.3.1.5.2.6.4 0 .1 0 .7-.2 1.3Z"/></svg>
+      Escríbeme por WhatsApp
+    </a>
+    <p class="cta-sub">+58 412-778.22.32 · Respondo el mismo día</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="foot">
+    <span>© 2026 PolitiWeb Studio — Hecho en Venezuela 🇻🇪</span>
+    <div class="foot-links">
+      <a href="https://politiwebstudio.com" target="_blank" rel="noopener">politiwebstudio.com</a>
+      <a href="https://www.instagram.com/politiwebstudio/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://wa.me/584127782232" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  // ── Demo: cambia la terminología del mockup según el tipo de negocio ──
+  const PERFILES = {
+    consultorio: { app: 'DoctorHub', saludo: 'Bienvenida', nombre: 'Dra. Gómez', personas: 'Pacientes', serv1: 'Control prenatal', serv2: 'Ecografía', serv3: 'Consulta · Zelle' },
+    barberia:    { app: 'Kings Barber', saludo: 'Bienvenido', nombre: 'Luis Mendoza', personas: 'Clientes', serv1: 'Corte + barba', serv2: 'Cerquillo y cejas', serv3: 'Corte clásico · Pago Móvil' },
+    spa:         { app: 'Bella Spa', saludo: 'Bienvenida', nombre: 'Karla Núñez', personas: 'Clientas', serv1: 'Manicure semipermanente', serv2: 'Limpieza facial', serv3: 'Pedicure spa · Efectivo' },
+  };
+  const phone = document.getElementById('phone');
+  const swaps = phone.querySelectorAll('.t-swap');
+  const segBtns = document.querySelectorAll('.seg button');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  segBtns.forEach(btn => btn.addEventListener('click', () => {
+    if (btn.getAttribute('aria-pressed') === 'true') return;
+    segBtns.forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+    const datos = PERFILES[btn.dataset.perfil];
+    const aplicar = () => swaps.forEach(el => { el.textContent = datos[el.dataset.t]; });
+    if (reduced) { aplicar(); return; }
+    phone.classList.add('swapping');
+    setTimeout(() => { aplicar(); phone.classList.remove('swapping'); }, 220);
+  }));
+
+  // ── Reveals al hacer scroll (el contenido es visible por defecto sin JS) ──
+  if ('IntersectionObserver' in window && !reduced) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+  }
+</script>
+</body>
+</html>
