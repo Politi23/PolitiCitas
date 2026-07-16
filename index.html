@@ -41,6 +41,13 @@
   a { color: inherit; }
   img { max-width: 100%; }
 
+  /* ── Íconos SVG (trazo estilo lucide) ── */
+  .ic {
+    width: 20px; height: 20px; flex-shrink: 0;
+    fill: none; stroke: currentColor; stroke-width: 2;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+
   /* ── Fondo: malla + orbes (el mundo visual del producto) ── */
   .mesh {
     position: fixed; inset: 0; z-index: -2;
@@ -108,8 +115,10 @@
   .seg button {
     font: inherit; font-weight: 600; font-size: 0.88rem; letter-spacing: -0.01em;
     color: var(--ink-soft); background: transparent; border: 0; cursor: pointer;
-    padding: 8px 15px; border-radius: 12px; transition: background .18s ease, color .18s ease;
+    padding: 8px 14px; border-radius: 12px; transition: background .18s ease, color .18s ease;
+    display: inline-flex; align-items: center; gap: 7px;
   }
+  .seg .ic { width: 15px; height: 15px; }
   .seg button[aria-pressed="true"] { background: rgba(255,255,255,0.16); color: var(--ink); box-shadow: inset 0 1px 0 rgba(255,255,255,0.25); }
   .seg-hint { font-size: 0.84rem; color: var(--ink-soft); }
 
@@ -133,7 +142,9 @@
   }
   .s-top { display: flex; align-items: center; justify-content: space-between; padding: 2px 4px; }
   .s-app { color: var(--ink); font-weight: 800; font-size: 0.92rem; letter-spacing: -0.01em; }
-  .s-ic { width: 26px; height: 26px; border-radius: 9px; background: var(--glass-strong); border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.75rem; }
+  .s-ic { width: 26px; height: 26px; border-radius: 9px; background: var(--glass-strong); border: 1px solid var(--line); display: grid; place-items: center; color: var(--violet); }
+  .s-ic .ic { width: 13px; height: 13px; }
+  .s-bcv .ic { width: 11px; height: 11px; }
   .g-card {
     border-radius: 18px; padding: 12px 14px;
     background: var(--glass); border: 1px solid var(--line);
@@ -177,6 +188,7 @@
     padding: 11px 18px; border-radius: 999px; font-weight: 600; color: var(--ink);
     background: var(--glass); border: 1px solid var(--line); font-size: 0.97rem;
   }
+  .who-chip .ic { width: 17px; height: 17px; color: var(--violet); }
   .who-note { text-align: center; margin: 22px auto 0; color: var(--ink-soft); font-size: 0.95rem; }
 
   /* Feature principal (doble moneda) */
@@ -185,7 +197,7 @@
   .money p { margin-top: 16px; }
   .money-points { margin-top: 22px; display: grid; gap: 12px; list-style: none; }
   .money-points li { display: flex; gap: 12px; align-items: flex-start; color: var(--ink-body); }
-  .money-points .tick { color: #6ee7b7; font-weight: 800; flex-shrink: 0; }
+  .money-points .ic { width: 17px; height: 17px; color: #6ee7b7; stroke-width: 2.6; margin-top: 4px; }
   .receipt {
     border-radius: var(--radius); padding: 22px;
     background: var(--glass); border: 1px solid var(--line);
@@ -210,7 +222,8 @@
   }
   .feat:hover { transform: translateY(-4px); background: var(--glass-strong); }
   .feat.wide { grid-column: span 3; }
-  .feat .em { font-size: 1.5rem; }
+  .feat .fic { color: var(--violet); }
+  .feat .fic .ic { width: 26px; height: 26px; stroke-width: 1.8; }
   .feat h3 { font-size: 1.08rem; margin: 12px 0 7px; letter-spacing: -0.01em; }
   .feat p { font-size: 0.94rem; color: var(--ink-soft); line-height: 1.55; }
 
@@ -243,7 +256,10 @@
   .price .desde { color: var(--ink-soft); font-size: 0.86rem; margin-top: 6px; }
   .price ul { margin-top: 20px; list-style: none; display: grid; gap: 10px; }
   .price li { display: flex; gap: 10px; font-size: 0.95rem; color: var(--ink-body); }
-  .price li::before { content: "✓"; color: #6ee7b7; font-weight: 800; }
+  .price li::before {
+    content: ""; width: 15px; height: 15px; flex-shrink: 0; margin-top: 5px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236ee7b7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/contain no-repeat;
+  }
   .price-note { margin-top: 20px; color: var(--ink-soft); font-size: 0.93rem; max-width: 860px; }
 
   /* FAQ */
@@ -310,6 +326,24 @@
 </style>
 </head>
 <body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-steth" viewBox="0 0 24 24"><path d="M11 2v2"/><path d="M5 2v2"/><path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1"/><path d="M8 15a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="M9.94 15.5a2 2 0 0 0-1.44-1.44l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13a2 2 0 0 0 1.44 1.44l6.13 1.58a.5.5 0 0 1 0 .96l-6.13 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></symbol>
+  <symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/></symbol>
+  <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></symbol>
+  <symbol id="i-paw" viewBox="0 0 24 24"><circle cx="11" cy="4" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="4" cy="8" r="2"/><circle cx="20" cy="16" r="2"/><path d="M9 10a5 5 0 0 1 5 5v3.5a3.5 3.5 0 0 1-6.84 1.045Q6.52 17.48 4.46 16.84A3.5 3.5 0 0 1 5.5 10Z"/></symbol>
+  <symbol id="i-calcheck" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><path d="M12 20v-9"/><path d="M18 20V4"/><path d="M6 20v-5"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2"/><path d="M12 18h.01"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="M22 7 13.5 15.5 8.5 10.5 2 17"/><path d="M16 7h6v6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+</svg>
 <div class="mesh" aria-hidden="true"></div>
 <div class="orb orb-1" aria-hidden="true"></div>
 <div class="orb orb-2" aria-hidden="true"></div>
@@ -342,22 +376,22 @@
 
     <div class="demo-col">
       <div class="seg" role="group" aria-label="Elige un tipo de negocio para la demostración">
-        <button type="button" data-perfil="consultorio" aria-pressed="true">🩺 Consultorio</button>
-        <button type="button" data-perfil="barberia" aria-pressed="false">💈 Barbería</button>
-        <button type="button" data-perfil="spa" aria-pressed="false">💅 Spa</button>
+        <button type="button" data-perfil="consultorio" aria-pressed="true"><svg class="ic" aria-hidden="true"><use href="#i-steth"/></svg>Consultorio</button>
+        <button type="button" data-perfil="barberia" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-scissors"/></svg>Barbería</button>
+        <button type="button" data-perfil="spa" aria-pressed="false"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>Spa</button>
       </div>
 
       <div class="phone" id="phone" aria-label="Vista previa de la aplicación">
         <div class="screen">
           <div class="s-top">
             <span class="s-app t-swap" data-t="app">DoctorHub</span>
-            <span class="s-ic">📊</span>
+            <span class="s-ic"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></span>
           </div>
           <div class="g-card s-hello">
             <div class="cap t-swap" data-t="saludo">Bienvenida</div>
             <div class="h1 t-swap" data-t="nombre">Dra. Gómez</div>
             <div class="cap">martes, 15 de julio</div>
-            <span class="s-bcv">📈 BCV <b>142,35 Bs</b></span>
+            <span class="s-bcv"><svg class="ic" aria-hidden="true"><use href="#i-trend"/></svg> BCV <b>142,35 Bs</b></span>
           </div>
           <div class="s-stats">
             <div class="g-card s-stat"><div class="n">248</div><div class="l t-swap" data-t="personas">Pacientes</div></div>
@@ -385,20 +419,20 @@
           </div>
         </div>
       </div>
-      <p class="seg-hint">👆 La misma app, con las palabras de tu negocio.</p>
+      <p class="seg-hint">La misma app, con las palabras de tu negocio.</p>
     </div>
   </div>
 </header>
 
 <section class="who wrap reveal">
   <div class="who-track">
-    <span class="who-chip">🩺 Médicos y especialistas</span>
-    <span class="who-chip">💈 Barberías</span>
-    <span class="who-chip">💅 Estética y spas</span>
-    <span class="who-chip">🧠 Psicólogos</span>
-    <span class="who-chip">🦷 Odontólogos</span>
-    <span class="who-chip">🐾 Veterinarias</span>
-    <span class="who-chip">📋 Y cualquier negocio con citas</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-steth"/></svg>Médicos y especialistas</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-scissors"/></svg>Barberías</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg>Estética y spas</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-brain"/></svg>Psicólogos</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-smile"/></svg>Odontólogos</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-paw"/></svg>Veterinarias</span>
+    <span class="who-chip"><svg class="ic" aria-hidden="true"><use href="#i-calcheck"/></svg>Y cualquier negocio con citas</span>
   </div>
   <p class="who-note">Si tu día se organiza por citas y necesitas saber cuánto entra y cuánto sale, esto es para ti.</p>
 </section>
@@ -409,10 +443,10 @@
       <h2>Dólares y bolívares sin sacar la calculadora</h2>
       <p>Los sistemas genéricos no entienden cómo se cobra en Venezuela. El tuyo sí: cada pago se registra en su moneda y se convierte automáticamente con la tasa BCV del día.</p>
       <ul class="money-points">
-        <li><span class="tick">✓</span>Tasa BCV actualizada sola, todos los días</li>
-        <li><span class="tick">✓</span>Cada pago guarda la tasa del día en que se cobró — tus totales históricos nunca se dañan</li>
-        <li><span class="tick">✓</span>Efectivo, Zelle, Pago Móvil, transferencia, PayPal, cripto — y pagos divididos en dos métodos</li>
-        <li><span class="tick">✓</span>Totales del mes y del año en USD reales, no estimados</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Tasa BCV actualizada sola, todos los días</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Cada pago guarda la tasa del día en que se cobró — tus totales históricos nunca se dañan</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Efectivo, Zelle, Pago Móvil, transferencia, PayPal, cripto — y pagos divididos en dos métodos</li>
+        <li><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Totales del mes y del año en USD reales, no estimados</li>
       </ul>
     </div>
     <div class="receipt reveal" aria-label="Ejemplo de resumen mensual">
@@ -432,42 +466,42 @@
   </div>
   <div class="feats">
     <div class="feat wide reveal">
-      <div class="em">📅</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-calendar"/></svg></div>
       <h3>Agenda de citas</h3>
       <p>Cita rápida en tres toques, estados (atendida, cancelada, no asistió), reagendado con un botón y vista de los próximos 7 días.</p>
     </div>
     <div class="feat wide reveal">
-      <div class="em">💬</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-chat"/></svg></div>
       <h3>WhatsApp integrado</h3>
       <p>Escríbele a tus clientes con un toque y reactiva a los que tienen meses sin venir, con mensajes con tu nombre y tu estilo.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">👥</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-users"/></svg></div>
       <h3>Fichas de clientes</h3>
       <p>Historial completo de citas y pagos por persona, con teléfono y cédula venezolanos.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">🧾</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-file"/></svg></div>
       <h3>Reportes en PDF</h3>
       <p>Reporte mensual o anual de ingresos y egresos, listo para imprimir o enviar.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">📊</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-chart"/></svg></div>
       <h3>Estadísticas</h3>
       <p>Tus mejores meses, servicios más pedidos y comparativas — decide con datos.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">✨</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-sparkles"/></svg></div>
       <h3>Asistente con IA</h3>
       <p>Pregúntale «¿cuánto ingresé este mes?» y te responde con tus números reales.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">📱</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-phone"/></svg></div>
       <h3>Se instala como app</h3>
       <p>Directo en tu teléfono, sin tiendas de aplicaciones y sin descargas de nadie más.</p>
     </div>
     <div class="feat reveal">
-      <div class="em">🔒</div>
+      <div class="fic"><svg class="ic" aria-hidden="true"><use href="#i-lock"/></svg></div>
       <h3>Tus datos son tuyos</h3>
       <p>Base de datos propia y exclusiva para tu negocio, con acceso solo para ti.</p>
     </div>
@@ -569,7 +603,7 @@
 
 <footer class="wrap">
   <div class="foot">
-    <span>© 2026 PolitiWeb Studio — Hecho en Venezuela 🇻🇪</span>
+    <span>© 2026 PolitiWeb Studio — Hecho en Venezuela</span>
     <div class="foot-links">
       <a href="https://politiwebstudio.com" target="_blank" rel="noopener">politiwebstudio.com</a>
       <a href="https://www.instagram.com/politiwebstudio/" target="_blank" rel="noopener">Instagram</a>
