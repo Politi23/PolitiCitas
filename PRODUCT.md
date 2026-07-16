@@ -27,7 +27,8 @@ Tres palabras: **directa, tecnológica, cercana** (español venezolano, tuteo).
 
 ## Conversión
 - CTA único: WhatsApp +58 412-7782232 con mensaje precargado.
-- Precios "desde": implementación desde $200 único + plan desde $15/mes.
+- Sin precios publicados: todo manda a cotizar por WhatsApp (el usuario cierra la venta
+  en la conversación). Se menciona que hay opciones de financiamiento (pago por partes).
 - Pieza distintiva: el mockup cambia su terminología en vivo (Consultorio /
   Barbería / Spa) — demuestra el pitch "la misma base, tu negocio".
 
