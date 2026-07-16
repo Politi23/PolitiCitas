@@ -32,6 +32,16 @@ Tres palabras: **directa, tecnológica, cercana** (español venezolano, tuteo).
 - Pieza distintiva: el mockup cambia su terminología en vivo (Consultorio /
   Barbería / Spa) — demuestra el pitch "la misma base, tu negocio".
 
+## Stack
+Next.js 15 (App Router, React 19, TypeScript) + Tailwind CSS 4 + Motion.
+- Fuente Bricolage Grotesque auto-hospedada vía `next/font` (sin CDN externo).
+- Todo pre-renderizado estático (SSG). Contenido y datos en `lib/site.ts`.
+- Design system del producto en `app/globals.css`; secciones en `components/`.
+- Efectos: entrada orquestada del hero, tilt 3D del teléfono (desactivado en touch
+  y con `prefers-reduced-motion`), contadores animados, selector con pill animado
+  (layoutId), reveals con stagger.
+
 ## Deploy
-Archivo único `index.html` autocontenido → Vercel (ej. `citas.politiwebstudio.com`).
-Preview como Artifact de Claude.
+GitHub `Politi23/PolitiCitas` → Vercel detecta Next.js automáticamente →
+dominio `citas.politiwebstudio.com` (CNAME en Hostinger a cname.vercel-dns.com).
+Correr local: `npm run dev`.
