@@ -97,20 +97,18 @@ export function Money() {
 }
 
 /* ── Funciones ── */
-const FEATS: { icon: IconName; titulo: string; texto: string; wide?: boolean }[] = [
+const FEATS: { icon: IconName; titulo: string; texto: string }[] = [
   {
     icon: "calendar",
     titulo: "Agenda de citas",
     texto:
       "Cita rápida en tres toques, estados (atendida, cancelada, no asistió), reagendado con un botón y vista de los próximos 7 días.",
-    wide: true,
   },
   {
     icon: "chat",
     titulo: "WhatsApp integrado",
     texto:
       "Escríbele a tus clientes con un toque y reactiva a los que tienen meses sin venir, con mensajes con tu nombre y tu estilo.",
-    wide: true,
   },
   {
     icon: "users",
@@ -131,19 +129,17 @@ const FEATS: { icon: IconName; titulo: string; texto: string; wide?: boolean }[]
     icon: "phone",
     titulo: "Se instala como app",
     texto: "Directo en tu teléfono, sin tiendas de aplicaciones y sin descargas de nadie más.",
-    wide: true,
   },
   {
     icon: "lock",
     titulo: "Tus datos son tuyos",
     texto: "Base de datos propia y exclusiva para tu negocio, con acceso solo para ti.",
-    wide: true,
   },
 ];
 
 export function Features() {
   return (
-    <section className="wrap">
+    <section className="wrap" id="funciones">
       <Reveal className="sec-head">
         <h2>Todo lo que tu negocio necesita, nada que no uses</h2>
         <p>
@@ -151,14 +147,16 @@ export function Features() {
           negocio real la usa todos los días.
         </p>
       </Reveal>
-      <RevealStagger className="feats" gap={0.06}>
+      <RevealStagger className="feats" gap={0.05}>
         {FEATS.map((f) => (
-          <StaggerItem key={f.titulo} className={f.wide ? "feat wide" : "feat"}>
-            <div className="fic">
+          <StaggerItem key={f.titulo} className="feat">
+            <span className="fic">
               <Ic name={f.icon} />
+            </span>
+            <div>
+              <h3>{f.titulo}</h3>
+              <p>{f.texto}</p>
             </div>
-            <h3>{f.titulo}</h3>
-            <p>{f.texto}</p>
           </StaggerItem>
         ))}
       </RevealStagger>
@@ -187,7 +185,7 @@ const PASOS = [
 
 export function Steps() {
   return (
-    <section className="wrap">
+    <section className="wrap" id="proceso">
       <Reveal className="sec-head">
         <h2>De la primera conversación a tu app funcionando</h2>
       </Reveal>
@@ -290,7 +288,7 @@ const PREGUNTAS = [
 
 export function Faq() {
   return (
-    <section className="wrap">
+    <section className="wrap" id="faq">
       <Reveal className="sec-head">
         <h2>Preguntas frecuentes</h2>
       </Reveal>
@@ -328,23 +326,48 @@ export function CtaFinal() {
 
 export function Footer() {
   return (
-    <footer className="wrap">
-      <div className="foot">
-        <span>© 2026 PolitiWeb Studio · Hecho en Venezuela</span>
-        <div className="foot-links">
-          <a href={SITE.web} target="_blank" rel="noopener">
-            politiwebstudio.com
-          </a>
-          <a href={SITE.instagram} target="_blank" rel="noopener">
-            Instagram
-          </a>
-          <a href={waLinkFooter} target="_blank" rel="noopener">
-            WhatsApp
-          </a>
+    <footer className="site-footer">
+      <div className="wrap">
+        <div className="foot-grid">
+          <div className="foot-brand">
+            <a className="logo" href="#">
+              <span className="logo-mark">P</span>PolitiWeb Studio
+            </a>
+            <p>
+              Desarrollo web y sistemas de gestión a la medida para negocios de
+              servicios en Venezuela.
+            </p>
+            <p className="foot-loc">Caracas, Venezuela</p>
+          </div>
+
+          <nav className="foot-col" aria-label="Secciones">
+            <p className="foot-title">Explora</p>
+            <a href="#funciones">Funciones</a>
+            <a href="#proceso">Cómo trabajo</a>
+            <a href="#cotizacion">Cotización</a>
+            <a href="#faq">Preguntas frecuentes</a>
+          </nav>
+
+          <nav className="foot-col" aria-label="Contacto">
+            <p className="foot-title">Contacto</p>
+            <a href={WA_INFO} target="_blank" rel="noopener">
+              <WaIc className="foot-ic" />
+              {SITE.telefonoDisplay}
+            </a>
+            <a href={SITE.instagram} target="_blank" rel="noopener">
+              @politiwebstudio
+            </a>
+            <a href={SITE.web} target="_blank" rel="noopener">
+              politiwebstudio.com
+            </a>
+          </nav>
+        </div>
+
+        <div className="foot-bar">
+          <span>© 2026 PolitiWeb Studio. Todos los derechos reservados.</span>
+          <span>Hecho en Venezuela, con la misma tecnología que instalamos.</span>
         </div>
       </div>
     </footer>
   );
 }
-
-const waLinkFooter = "https://wa.me/584127782232";
