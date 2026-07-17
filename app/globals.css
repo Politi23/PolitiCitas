@@ -83,26 +83,22 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
 .btn-sm { padding: 9px 16px; font-size: 0.9rem; border-radius: 13px; }
 .wa-ic { width: 19px; height: 19px; flex-shrink: 0; }
 
-/* ── Hero: titular editorial a todo lo ancho, teléfono invadiendo su zona ── */
-.hero { padding: clamp(110px, 15vh, 160px) 0 clamp(40px, 6vh, 70px); }
+/* ── Hero ── */
+.hero { padding: clamp(105px, 14vh, 150px) 0 clamp(40px, 6vh, 70px); }
+.hero-grid {
+  display: grid; grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(36px, 5vw, 80px); align-items: center;
+}
 .hero-title {
-  font-size: clamp(2.6rem, 6vw, 4.9rem);
-  letter-spacing: -0.03em; line-height: 1.04;
-  max-width: 19ch;
+  font-size: clamp(2.3rem, 4.2vw, 3.55rem);
+  letter-spacing: -0.028em; line-height: 1.06;
+  max-width: 21ch;
 }
 .h1-top {
-  display: block; font-size: 0.4em; font-weight: 600; line-height: 1.3;
-  letter-spacing: -0.01em; color: var(--ink-soft); margin-bottom: 14px;
+  display: block; font-size: 0.44em; font-weight: 600; line-height: 1.3;
+  letter-spacing: -0.01em; color: var(--ink-soft); margin-bottom: 12px;
 }
-.hero-row {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(32px, 5vw, 72px); align-items: start;
-  margin-top: clamp(28px, 4vh, 44px);
-}
-.hero-copy { max-width: 54ch; }
-.hero-demo { margin-top: -170px; }
-.hero-sub { font-size: clamp(1.02rem, 1.4vw, 1.16rem); color: var(--ink-body); }
-.hero-specs { margin-top: 16px; font-size: 0.95rem; font-weight: 600; color: var(--ink-soft); }
+.hero-sub { margin-top: 20px; font-size: clamp(1.02rem, 1.4vw, 1.16rem); color: var(--ink-body); max-width: 52ch; }
 .hero-cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
 .link-quiet {
   color: var(--ink-body); font-weight: 600; text-decoration: underline;
@@ -110,8 +106,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible {
   transition: color 0.15s ease;
 }
 .link-quiet:hover { color: var(--ink); text-decoration-color: var(--violet); }
-.hero-proof { margin-top: 26px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 0.92rem; }
+.hero-proof { margin-top: 24px; display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: 0.92rem; }
 .dot-live { width: 9px; height: 9px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.18); flex-shrink: 0; }
+.hero-for { margin-top: 34px; padding-top: 26px; border-top: 1px solid rgba(255, 255, 255, 0.09); }
+.hero-for-label { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: 12px; }
+.hero-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip-sm {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 13px; border-radius: 999px;
+  font-weight: 600; font-size: 0.86rem; color: var(--ink-body);
+  background: var(--glass); border: 1px solid var(--line);
+}
+.chip-sm .ic { width: 14px; height: 14px; color: var(--violet); }
 
 /* ── Teléfono demo ── */
 .demo-col { display: flex; flex-direction: column; align-items: center; gap: 18px; }
@@ -186,17 +192,6 @@ section { padding: clamp(56px, 9vh, 110px) 0; }
 .sec-head { max-width: 640px; margin-bottom: clamp(30px, 5vh, 52px); }
 .sec-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.6rem); letter-spacing: -0.02em; }
 .sec-head p { margin-top: 14px; color: var(--ink-body); }
-
-/* Para quién */
-.who { padding: 10px 0 0; }
-.who-track { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-.who-chip {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 11px 18px; border-radius: 999px; font-weight: 600; color: var(--ink);
-  background: var(--glass); border: 1px solid var(--line); font-size: 0.97rem;
-}
-.who-chip .ic { width: 17px; height: 17px; color: var(--violet); }
-.who-note { text-align: center; margin: 22px auto 0; color: var(--ink-soft); font-size: 0.95rem; }
 
 /* Feature principal (doble moneda) */
 .money { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 4vw, 60px); align-items: center; }
@@ -337,8 +332,7 @@ section { padding: clamp(56px, 9vh, 110px) 0; }
 
 @media (max-width: 900px) {
   .nav-links { display: none; }
-  .hero-row { grid-template-columns: 1fr; }
-  .hero-demo { margin-top: 16px; justify-self: center; }
+  .hero-grid { grid-template-columns: 1fr; }
   .money { grid-template-columns: 1fr; }
   .steps { grid-template-columns: 1fr; }
   .quote { grid-template-columns: 1fr; }

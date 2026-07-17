@@ -3,36 +3,6 @@ import { Ic, WaIc, type IconName } from "@/components/icons";
 import { Reveal, RevealStagger, StaggerItem } from "@/components/reveal";
 import { Counter } from "@/components/counter";
 
-/* ── Para quién ── */
-const OFICIOS: { icon: IconName; label: string }[] = [
-  { icon: "steth", label: "Médicos y especialistas" },
-  { icon: "scissors", label: "Barberías" },
-  { icon: "sparkles", label: "Estética y spas" },
-  { icon: "brain", label: "Psicólogos" },
-  { icon: "smile", label: "Odontólogos" },
-  { icon: "paw", label: "Veterinarias" },
-  { icon: "calcheck", label: "Y cualquier negocio con citas" },
-];
-
-export function Who() {
-  return (
-    <section className="who wrap">
-      <RevealStagger className="who-track" gap={0.05}>
-        {OFICIOS.map((o) => (
-          <StaggerItem key={o.label} className="who-chip">
-            <Ic name={o.icon} />
-            {o.label}
-          </StaggerItem>
-        ))}
-      </RevealStagger>
-      <Reveal className="who-note">
-        Si tu día se organiza por citas y necesitas saber cuánto entra y cuánto
-        sale, esto es para ti.
-      </Reveal>
-    </section>
-  );
-}
-
 /* ── Doble moneda ── */
 const MONEY_POINTS = [
   "Tasa BCV actualizada sola, todos los días",
