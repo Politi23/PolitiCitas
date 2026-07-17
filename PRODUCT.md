@@ -1,4 +1,4 @@
-# PRODUCT.md — Landing de venta PolitiWeb Studio
+# PRODUCT.md — Landing de venta PolitiWebStudio
 
 ## Qué es
 Landing page de una sola página, en español, para vender sistemas de gestión de citas

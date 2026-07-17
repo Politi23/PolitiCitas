@@ -8,7 +8,7 @@ export function Nav() {
       <div className="wrap nav-in">
         <a className="logo" href="#">
           <Image src="/logo.png" alt="" width={34} height={34} className="logo-img" priority />
-          PolitiWeb Studio
+          PolitiWebStudio
         </a>
         <div className="nav-links">
           <a href="#funciones">Funciones</a>

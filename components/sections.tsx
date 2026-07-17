@@ -303,7 +303,7 @@ export function Footer() {
           <div className="foot-brand">
             <a className="logo" href="#">
               <Image src="/logo.png" alt="" width={30} height={30} className="logo-img" />
-              PolitiWeb Studio
+              PolitiWebStudio
             </a>
             <p>
               Desarrollo web y sistemas de gestión a la medida para negocios de
@@ -336,7 +336,7 @@ export function Footer() {
         </div>
 
         <div className="foot-bar">
-          <span>© 2026 PolitiWeb Studio. Todos los derechos reservados.</span>
+          <span>© 2026 PolitiWebStudio. Todos los derechos reservados.</span>
           <span>Hecho en Venezuela, con la misma tecnología que instalamos.</span>
         </div>
       </div>

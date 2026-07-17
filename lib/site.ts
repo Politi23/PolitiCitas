@@ -1,6 +1,6 @@
 export const SITE = {
-  nombre: "PolitiWeb Studio",
-  titulo: "PolitiWeb Studio — Sistemas de citas a la medida de tu negocio",
+  nombre: "PolitiWebStudio",
+  titulo: "PolitiWebStudio — Sistemas de citas a la medida de tu negocio",
   descripcion:
     "Desarrollo sistemas de gestión de citas, clientes e ingresos para médicos, barberos y negocios de servicios en Venezuela. Dólares y bolívares a tasa BCV, WhatsApp integrado, listo en una semana.",
   url: "https://citas.politiwebstudio.com",
