@@ -32,13 +32,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" className={bricolage.variable}>
-      <body>
-        <div className="mesh" aria-hidden="true" />
-        <div className="orb orb-1" aria-hidden="true" />
-        <div className="orb orb-2" aria-hidden="true" />
-        <div className="orb orb-3" aria-hidden="true" />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
