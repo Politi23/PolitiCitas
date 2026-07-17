@@ -21,12 +21,13 @@ export function Hero() {
 
   return (
     <header className="hero wrap">
-      <div className="hero-grid">
-        <div>
-          <motion.h1 {...item(0)}>
-            <span className="h1-top">Citas, clientes e ingresos.</span>
-            Un sistema a la medida de tu negocio.
-          </motion.h1>
+      <motion.h1 className="hero-title" {...item(0)}>
+        <span className="h1-top">Citas, clientes e ingresos.</span>
+        Un sistema a la medida de tu negocio.
+      </motion.h1>
+
+      <div className="hero-row">
+        <div className="hero-copy">
           <motion.p className="hero-sub" {...item(1)}>
             Lo desarrollo con tu nombre, tus servicios y tus precios, y te lo
             entrego funcionando en una semana.
@@ -53,7 +54,10 @@ export function Hero() {
             Venezuela.
           </motion.p>
         </div>
-        <PhoneDemo />
+
+        <div className="hero-demo">
+          <PhoneDemo />
+        </div>
       </div>
     </header>
   );
