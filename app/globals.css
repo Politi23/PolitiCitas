@@ -312,7 +312,7 @@ section { padding: clamp(56px, 9vh, 110px) 0; }
 .foot-title { color: var(--ink); font-weight: 700; margin-bottom: 4px; }
 .foot-col a { text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
 .foot-col a:hover { color: var(--ink); }
-.foot-ic { width: 15px; height: 15px; }
+.foot-ic, .foot-col .ic { width: 15px; height: 15px; }
 .foot-bar {
   margin-top: clamp(32px, 5vh, 48px); padding-top: 22px;
   border-top: 1px solid rgba(255, 255, 255, 0.08);

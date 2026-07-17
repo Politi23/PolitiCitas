@@ -327,9 +327,11 @@ export function Footer() {
               {SITE.telefonoDisplay}
             </a>
             <a href={SITE.instagram} target="_blank" rel="noopener">
+              <Ic name="instagram" />
               @politiwebstudio
             </a>
             <a href={SITE.web} target="_blank" rel="noopener">
+              <Ic name="globe" />
               politiwebstudio.com
             </a>
           </nav>
