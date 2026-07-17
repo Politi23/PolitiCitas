@@ -8,9 +8,15 @@ export function Nav() {
         <a className="logo" href="#">
           <span className="logo-mark">P</span>PolitiWeb Studio
         </a>
+        <div className="nav-links">
+          <a href="#funciones">Funciones</a>
+          <a href="#proceso">Cómo trabajo</a>
+          <a href="#cotizacion">Cotización</a>
+          <a href="#faq">FAQ</a>
+        </div>
         <a className="btn btn-wa btn-sm" href={WA_INFO} target="_blank" rel="noopener">
           <WaIc />
-          WhatsApp
+          Cotizar
         </a>
       </div>
     </nav>

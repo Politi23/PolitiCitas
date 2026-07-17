@@ -24,25 +24,30 @@ export function Hero() {
       <div className="hero-grid">
         <div>
           <motion.h1 {...item(0)}>
-            Tu agenda, tus clientes y tus ingresos.{" "}
-            <em>Una app hecha para tu negocio.</em>
+            <span className="h1-top">Citas, clientes e ingresos.</span>
+            Un sistema a la medida de tu negocio.
           </motion.h1>
           <motion.p className="hero-sub" {...item(1)}>
-            Desarrollo sistemas de gestión a la medida para médicos, barberos y
-            cualquier negocio que viva de las citas. Con tu nombre, tus
-            servicios y tus precios: dólares y bolívares a tasa BCV, y WhatsApp
-            integrado.
+            Lo desarrollo con tu nombre, tus servicios y tus precios, y te lo
+            entrego funcionando en una semana.
           </motion.p>
-          <motion.div className="hero-cta" {...item(2)}>
+          <motion.p className="hero-specs" {...item(2)}>
+            Dólares y bolívares a tasa BCV
+            <span aria-hidden="true"> · </span>
+            WhatsApp integrado
+            <span aria-hidden="true"> · </span>
+            Para médicos, barberos y más
+          </motion.p>
+          <motion.div className="hero-cta" {...item(3)}>
             <a className="btn btn-wa" href={WA_INFO} target="_blank" rel="noopener">
               <WaIc />
               Pide tu cotización gratis
             </a>
-            <a className="btn btn-ghost" href="#cotizacion">
-              ¿Qué incluye?
+            <a className="link-quiet" href="#cotizacion">
+              ¿Qué incluye? →
             </a>
           </motion.div>
-          <motion.p className="hero-proof" {...item(3)}>
+          <motion.p className="hero-proof" {...item(4)}>
             <span className="dot-live" />
             En producción: usado a diario por especialistas de salud en
             Venezuela.
