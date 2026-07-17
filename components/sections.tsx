@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { SITE, WA_COTIZAR, WA_INFO } from "@/lib/site";
 import { Ic, WaIc, type IconName } from "@/components/icons";
 import { Reveal, RevealStagger, StaggerItem } from "@/components/reveal";
@@ -301,7 +302,8 @@ export function Footer() {
         <div className="foot-grid">
           <div className="foot-brand">
             <a className="logo" href="#">
-              <span className="logo-mark">P</span>PolitiWeb Studio
+              <Image src="/logo.png" alt="" width={30} height={30} className="logo-img" />
+              PolitiWeb Studio
             </a>
             <p>
               Desarrollo web y sistemas de gestión a la medida para negocios de

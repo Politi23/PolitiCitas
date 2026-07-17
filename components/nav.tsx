@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { WA_INFO } from "@/lib/site";
 import { WaIc } from "@/components/icons";
 
@@ -6,7 +7,8 @@ export function Nav() {
     <nav className="topnav">
       <div className="wrap nav-in">
         <a className="logo" href="#">
-          <span className="logo-mark">P</span>PolitiWeb Studio
+          <Image src="/logo.png" alt="" width={34} height={34} className="logo-img" priority />
+          PolitiWeb Studio
         </a>
         <div className="nav-links">
           <a href="#funciones">Funciones</a>
