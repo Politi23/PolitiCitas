@@ -167,7 +167,6 @@ export function PhoneDemo() {
           </div>
         </motion.div>
       </div>
-      <p className="seg-hint">La misma app, con las palabras de tu negocio.</p>
     </div>
   );
 }
