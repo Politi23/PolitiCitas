@@ -307,7 +307,7 @@ export function Footer() {
               Desarrollo web y sistemas de gestión a la medida para negocios de
               servicios en Venezuela.
             </p>
-            <p className="foot-loc">Caracas, Venezuela</p>
+            <p className="foot-loc">Puerto Cabello, Venezuela</p>
           </div>
 
           <nav className="foot-col" aria-label="Secciones">
