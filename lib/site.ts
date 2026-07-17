@@ -6,7 +6,6 @@ export const SITE = {
   url: "https://citas.politiwebstudio.com",
   instagram: "https://www.instagram.com/politiwebstudio/",
   web: "https://politiwebstudio.com",
-  telefonoDisplay: "+58 412-778.22.32",
 };
 
 const WA_NUM = "584127782232";

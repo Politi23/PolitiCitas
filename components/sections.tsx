@@ -289,7 +289,7 @@ export function CtaFinal() {
           <WaIc />
           Escríbeme por WhatsApp
         </a>
-        <p className="cta-sub">{SITE.telefonoDisplay} · Respondo el mismo día</p>
+        <p className="cta-sub">Respondo el mismo día</p>
       </Reveal>
     </section>
   );
@@ -324,7 +324,7 @@ export function Footer() {
             <p className="foot-title">Contacto</p>
             <a href={WA_INFO} target="_blank" rel="noopener">
               <WaIc className="foot-ic" />
-              {SITE.telefonoDisplay}
+              WhatsApp
             </a>
             <a href={SITE.instagram} target="_blank" rel="noopener">
               <Ic name="instagram" />
