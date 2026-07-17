@@ -142,9 +142,9 @@ const PASOS = [
       "Me escribes por WhatsApp y me cuentas cómo trabaja tu negocio: tus servicios, tus precios, cómo cobras.",
   },
   {
-    titulo: "La hago tuya",
+    titulo: "Diseño y desarrollo",
     texto:
-      "Desarrollo tu sistema según cómo trabaja tu negocio: con tu marca, tus servicios, tus precios y tu dominio propio.",
+      "Construyo tu sistema según cómo trabaja tu negocio: con tu marca, tus servicios, tus precios y tu dominio propio.",
   },
   {
     titulo: "Te la entrego lista",
