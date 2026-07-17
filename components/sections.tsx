@@ -144,7 +144,7 @@ const PASOS = [
   {
     titulo: "La hago tuya",
     texto:
-      "Desarrollo tu sistema sobre mi plataforma probada: tu nombre, tu logo, tus servicios y tu dominio propio.",
+      "Desarrollo tu sistema según cómo trabaja tu negocio: con tu marca, tus servicios, tus precios y tu dominio propio.",
   },
   {
     titulo: "Te la entrego lista",
