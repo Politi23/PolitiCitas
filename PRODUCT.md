@@ -26,7 +26,7 @@ Tres palabras: **directa, tecnológica, cercana** (español venezolano, tuteo).
 - Tipografía: Bricolage Grotesque (Google Fonts, fallback system-ui).
 
 ## Conversión
-- CTA único: WhatsApp +58 412-7782232 con mensaje precargado.
+- CTA único: WhatsApp con mensaje precargado (número solo en lib/site.ts, nunca visible en la página).
 - Sin precios publicados: todo manda a cotizar por WhatsApp (el usuario cierra la venta
   en la conversación). Se menciona que hay opciones de financiamiento (pago por partes).
 - Pieza distintiva: el mockup cambia su terminología en vivo (Consultorio /
